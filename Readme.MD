@@ -34,6 +34,101 @@ src/com/airtripe/studentmanagement
 3. Run the **Main** class.
 4. Use the console menu to manage students and courses.
 
+## UML Class Diagram
+(paste the ASCII UML here)
+# UML Class Diagram (ASCII)
+
+                          +---------------------+
+                          |     Person (abstract)|
+                          +----------------------+
+                          | - id : int           |
+                          | - fullName : String  |
+                          | - email : String     |
+                          | - phoneNumber : String|
+                          +----------------------+
+                          | + getRole() : String |
+                          +----------+-----------+
+                                     |
+                                     |
+                        +------------+-------------+
+                        |                          |
+               +-------------------+     +----------------------+
+               |     Student       |     |  GraduateStudent     |
+               +-------------------+     +----------------------+
+               | - courseName      |     | - researchTopic      |
+               | - className       |     +----------------------+
+               | - sectionName     |
+               | - feesPaid : bool |
+               +-------------------+
+               | + calculateGrade()|
+               | + matches()       |
+               +---------+---------+
+                         |
+                         |
+                +--------+----------+
+                |   implements      |
+                v                   v
+        +---------------+    +------------------+
+        |   Searchable  |    |    Gradeable     |
+        +---------------+    +------------------+
+        | +matches()    |    | +calculateGrade()|
+        +---------------+    +------------------+
+
+# Additional UML: Course, Enrollment, Services
+
++--------------------+          +---------------------+
+|      Course        |          |     Enrollment      |
++--------------------+          +---------------------+
+| - courseId : int   |          | - enrollmentId : int|
+| - courseName       |          | - Student student   |
+| - duration         |          | - Course course     |
+| - instructorName   |          | - date : LocalDate  |
++--------------------+          | - status : String   |
+| + matches()        |          +---------------------+
++---------+----------+          | +toString()         |
+|                     +---------------------+
+|
+|
++------v--------+
+|  Searchable   |
++---------------+
+
+
+Service Layer
+-------------
+
++-----------------------+
+|   StudentService      |
++-----------------------+
+| - students : List     |
++-----------------------+
+| + addStudent()        |
+| + viewAllStudents()   |
+| + searchById()        |
+| + deleteStudent()     |
++-----------------------+
+
++-----------------------+
+|   CourseService       |
++-----------------------+
+| - courses : List      |
++-----------------------+
+| + addCourse()         |
+| + viewAllCourses()    |
+| + searchById()        |
++-----------------------+
+
++-----------------------+
+|  EnrollmentService    |
++-----------------------+
+| - enrollments : List  |
++-----------------------+
+| + enrollStudent()     |
+| + viewAllEnrollments()|
++-----------------------+
+
+
+
 ## Author
 Rashmi Kalwadiya
 
